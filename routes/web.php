@@ -11,9 +11,11 @@ use App\Http\Controllers\PelaksanaKegiatanController;
 use App\Http\Controllers\PenganggaranBidangController;
 use App\Http\Controllers\PenganggaranKegiatanController;
 use App\Http\Controllers\PenganggaranPaketKegiatanController;
+use App\Http\Controllers\PenganggaranPendapatanController;
 use App\Http\Controllers\PenganggaranSubBidangController;
 use App\Http\Controllers\PenganggaranTahunBidangController;
 use App\Http\Controllers\PenganggaranTahunController;
+use App\Http\Controllers\PenganggaranTahunPendapatanController;
 use App\Http\Controllers\PerencanaanMisiController;
 use App\Http\Controllers\PerencanaanSasaranController;
 use App\Http\Controllers\PerencanaanTujuanController;
@@ -219,5 +221,12 @@ Route::middleware(['auth'])->prefix('desa')->group(function () {
         Route::get('{kegiatan}/paket-kegiatan/create', [PenganggaranPaketKegiatanController::class, 'create'])->name('penganggaran.paket.kegiatan.create');
         Route::post('{kegiatan}/paket-kegiatan/create', [PenganggaranPaketKegiatanController::class, 'store'])->name('penganggaran.paket.kegiatan.store');
         Route::get('{kegiatan}/paket-kegiatan', [PenganggaranPaketKegiatanController::class, 'index'])->name('penganggaran.paket.kegiatan.index');
+
+        Route::get('tahun/pendapatan', [PenganggaranTahunPendapatanController::class, 'index'])->name('pendapatan.tahun-anggaran.index');
+        Route::post('{tahun_anggaran}/pendapatan/destroys', [PenganggaranPendapatanController::class, 'destroys'])->name('penganggaran.pendapatan.destroy');
+        Route::get('{tahun_anggaran}/pendapatan', [PenganggaranPendapatanController::class, 'index'])->name('penganggaran.pendapatan.index');
+        Route::get('{tahun_anggaran}/pendapatan/create', [PenganggaranPendapatanController::class, 'create'])->name('penganggaran.pendapatan.create');
+        Route::post('{tahun_anggaran}/pendapatan/store', [PenganggaranPendapatanController::class, 'store'])->name('penganggaran.pendapatan.store');
+
     });
 });
