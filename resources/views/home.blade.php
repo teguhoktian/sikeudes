@@ -7,22 +7,18 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="page-title-box">
-                <h4 class="page-title">Starter Page </h4>
+                <h4 class="page-title">{{ __('Dahsboard') }}</h4>
                 <ol class="breadcrumb p-0 m-0">
                     <li>
-                        <a href="#">Zircos</a>
-                    </li>
-                    <li>
-                        <a href="#">Pages </a>
+                        <a href="#">{{ __('Dashboard') }}</a>
                     </li>
                     <li class="active">
-                        Blank Page
+                        {{ __('Home') }}
                     </li>
                 </ol>
                 <div class="clearfix"></div>
             </div>
         </div>
-        {{ Auth::user()->village->budget_periods }}
     </div>
     <!-- end row -->
 

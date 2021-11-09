@@ -106,27 +106,27 @@
                             </a>
                         </li>
                         <li>
-                            <a @if (Request::segment(2)=='penganggaran' && in_array(Request::segment(4),["bidang", "sub-bidang"]) ) class="open" @endif href="desa/penganggaran/tahun/bidang">
+                            <a @if (Request::segment(2)=='penganggaran' && in_array(Request::segment(4),["bidang", "sub-bidang", "kegiatan"]) ) class="open" @endif href="desa/penganggaran/tahun/bidang">
                                 {{ __('Kegiatan') }}
                             </a>
                         </li>
                         <li>
-                            <a @if (Request::segment(2)=='' ) class="open" @endif href="desa/rpjmd/visi">
+                            <a @if (Request::segment(2)=='pendapatan' ) class="open" @endif href="desa/rpjmd/visi">
                                 {{ __('Pendapatan') }}
                             </a>
                         </li>
                         <li>
-                            <a @if (Request::segment(2)=='' ) class="open" @endif href="desa/rpjmd/visi">
+                            <a @if (Request::segment(2)=='belanja' ) class="open" @endif href="desa/rpjmd/visi">
                                 {{ __('Belanja') }}
                             </a>
                         </li>
                         <li>
-                            <a @if (Request::segment(2)=='' ) class="open" @endif href="desa/rpjmd/visi">
+                            <a @if (Request::segment(2)=='biaya-pendapatan' ) class="open" @endif href="desa/rpjmd/visi">
                                 {{ __('Pembiayaan Pdpt.') }}
                             </a>
                         </li>
                         <li>
-                            <a @if (Request::segment(2)=='' ) class="open" @endif href="desa/rpjmd/visi">
+                            <a @if (Request::segment(2)=='biaya-belanja' ) class="open" @endif href="desa/rpjmd/visi">
                                 {{ __('Pembiayaan Belanja') }}
                             </a>
                         </li>
