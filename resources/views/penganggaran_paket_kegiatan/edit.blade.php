@@ -5,16 +5,16 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="page-title-box">
-                <h4 class="page-title">{{ __('Penganggaran Kegiatan') }} - {{ Auth::user()->desa->nama }}</h4>
+                <h4 class="page-title">{{ __('Paket Kegiatan') }} - {{ Auth::user()->desa->nama }}</h4>
                 <ol class="breadcrumb p-0 m-0">
                     <li>
                         <a href="/">{{ __('Beranda') }}</a>
                     </li>
                     <li>
-                        <a href="/">{{ __('Penganggaran Kegiatan') }} </a>
+                        <a href="/">{{ __('Paket Kegiatan') }} </a>
                     </li>
                     <li class="active">
-                        {{ __('Penganggaran Kegiatan') }}
+                        {{ __('Paket Kegiatan') }}
                     </li>
                 </ol>
                 <div class="clearfix"></div>
@@ -32,11 +32,11 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        {{ Form::model($kegiatan, [ 'route' => ['penganggaran.kegiatan.update', $kegiatan->id], 'autocomplete' => 'off', 'method' => 'PATCH', 'enctype' => 'multipart/form-data' ]) }}
+                        {{ Form::model($paketKegiatan, [ 'route' => ['penganggaran.paket.kegiatan.update', $paketKegiatan->id], 'autocomplete' => 'off', 'method' => 'PATCH', 'enctype' => 'multipart/form-data' ]) }}
 
-                        @include('penganggaran_kegiatan.form')
+                        @include('penganggaran_paket_kegiatan.form')
                         <button class="btn btn-primary" type="submit"><i class="mdi mdi-content-save"></i> {{ __('Simpan') }}</button>
-                        <a href="{{ route('penganggaran.kegiatan.index', ['sub_bidang' => $kegiatan->penganggaran_sub_bidang->id]) }}" class="btn-danger btn">{{ __('Kembali') }}</a>
+                        <a href="{{ route('penganggaran.paket.kegiatan.index', ['kegiatan' => $paketKegiatan->penganggaran_kegiatan->id]) }}" class="btn-danger btn">{{ __('Kembali') }}</a>
                         </form>
                     </div>
                 </div>

@@ -24,8 +24,7 @@ class PenganggaranPaketKegiatanServices
             })
             ->addColumn('action', function ($row) {
                 $button = '';
-                //$button .= '<a href="' . route('penganggaran.kegiatan.edit', ['kegiatan' => $row->id]) . '" class="btn btn-sm btn-default btn-rounded"><i class="mdi mdi-lead-pencil"></i> ' . __('Ubah') . '</a>';
-                //$button .= '<a href="' . route('penganggaran.paket.kegiatan.index', ['kegiatan' => $row->id]) . '" class="btn btn-sm btn-default btn-rounded"><i class=" mdi mdi-plus-circle-outline"></i> ' . __('Paket Kegiatan') . '</a>';
+                $button .= '<a href="' . route('penganggaran.paket.kegiatan.edit', ['paket_kegiatan' => $row->id]) . '" class="btn btn-sm btn-default btn-rounded"><i class="mdi mdi-lead-pencil"></i> ' . __('Ubah') . '</a>';
                 return $button;
             })->make();
     }

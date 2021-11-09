@@ -65,14 +65,13 @@ class PenganggaranPaketKegiatanController extends Controller
      * @param  \App\Models\PenganggaranPaketKegiatan  $penganggaranPaketKegiatan
      * @return \Illuminate\Http\Response
      */
-    public function edit(RPJMDDanaIndikatif $danaIndikatif, PenganggaranPaketKegiatanServices $services)
+    public function edit(PenganggaranPaketKegiatan $paketKegiatan, PenganggaranPaketKegiatanServices $services)
     {
         return view('penganggaran_paket_kegiatan.edit')->with([
-            'pelaksana' => $services->getPelaksana()->pluck('jabatan', 'id'),
             'sumber_dana' => $services->getSumberDana()->pluck('nama', 'id'),
-            'danaIndikatif' => $danaIndikatif,
-            'tahun_kegiatans' => $services->getTahunKegiatanByKegiatan($danaIndikatif->tahun_kegiatan->rpjmd_kegiatan, $danaIndikatif->id_rpjmd_tahun_kegiatan)->pluck('full_name', 'id'),
-            'pola_kegiatan' => $services->getPolaKegiatanOptions()
+            'paketKegiatan' => $paketKegiatan,
+            'pola_kegiatan' => $services->getPolaKegiatanOptions(),
+            'sifat_kegiatan' => $services->getSifatKegiatanOptions(),
         ]);
     }
 
@@ -83,10 +82,10 @@ class PenganggaranPaketKegiatanController extends Controller
      * @param  \App\Models\PenganggaranPaketKegiatan  $penganggaranPaketKegiatan
      * @return \Illuminate\Http\Response
      */
-    public function update(RPJMDDanaIndikatifRequest $request, RPJMDDanaIndikatif $danaIndikatif, PenganggaranPaketKegiatanServices $services)
+    public function update(PenganggaranPaketKegiatanRequest $request, PenganggaranPaketKegiatan $paketKegiatan, PenganggaranPaketKegiatanServices $services)
     {
-        $services->update($request, $danaIndikatif);
-        return redirect()->route('penganggaran.paket.kegiatan.index', ['kegiatan' => $danaIndikatif->tahun_kegiatan->rpjmd_kegiatan->id])->with(['status' => 'success', 'message' => __('Data telah disimpan')]);
+        $services->update($request, $paketKegiatan);
+        return redirect()->route('penganggaran.paket.kegiatan.index', ['kegiatan' => $paketKegiatan->penganggaran_kegiatan->id])->with(['status' => 'success', 'message' => __('Data telah disimpan')]);
     }
 
     /**
@@ -104,7 +103,7 @@ class PenganggaranPaketKegiatanController extends Controller
     {
         if ($request->id) {
             foreach ($request->id as $id) {
-                RPJMDDanaIndikatif::find($id)->delete();
+                PenganggaranPaketKegiatan::find($id)->delete();
             }
         }
         return redirect()->route('penganggaran.paket.kegiatan.index', ['kegiatan' => $kegiatan->id])->with(['status' => 'success', 'message' => __('Data telah dihapus')]);

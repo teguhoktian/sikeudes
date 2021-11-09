@@ -213,8 +213,8 @@ Route::middleware(['auth'])->prefix('desa')->group(function () {
         Route::patch('{kegiatan}/kegiatan/update', [PenganggaranKegiatanController::class, 'update'])->name('penganggaran.kegiatan.update');
         Route::post('{sub_bidang}/kegiatan/store', [PenganggaranKegiatanController::class, 'store'])->name('penganggaran.kegiatan.store');
 
-        Route::get('{paket_kegaitan}/paket-kegiatan/edit', [PenganggaranPaketKegiatanController::class, 'edit'])->name('penganggaran.paket.kegiatan.edit');
-        Route::patch('{paket_kegaitan}/paket-kegiatan/update', [PenganggaranPaketKegiatanController::class, 'update'])->name('penganggaran.paket.kegiatan.update');
+        Route::get('{paket_kegiatan}/paket-kegiatan/edit', [PenganggaranPaketKegiatanController::class, 'edit'])->name('penganggaran.paket.kegiatan.edit');
+        Route::patch('{paket_kegiatan}/paket-kegiatan/update', [PenganggaranPaketKegiatanController::class, 'update'])->name('penganggaran.paket.kegiatan.update');
         Route::post('{kegiatan}/paket-kegiatan/destroys', [PenganggaranPaketKegiatanController::class, 'destroys'])->name('penganggaran.paket.kegiatan.destroy');
         Route::get('{kegiatan}/paket-kegiatan/create', [PenganggaranPaketKegiatanController::class, 'create'])->name('penganggaran.paket.kegiatan.create');
         Route::post('{kegiatan}/paket-kegiatan/create', [PenganggaranPaketKegiatanController::class, 'store'])->name('penganggaran.paket.kegiatan.store');
