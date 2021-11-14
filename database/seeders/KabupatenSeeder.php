@@ -13,17 +13,25 @@ class KabupatenSeeder extends Seeder
      */
     public function run()
     {
-        //
+
+        $provinsi = \App\Models\Provinsi::where(['kode' => '32'])->first();
+
         \App\Models\Kabupaten::create([
             'nama' => 'Kabupaten Bandung',
             'kode' => '04',
-            'id_provinsi' => null
+            'id_provinsi' => $provinsi->id
         ]);
 
         \App\Models\Kabupaten::create([
             'nama' => 'Kabupaten Bandung Barat',
             'kode' => '17',
-            'id_provinsi' => null
+            'id_provinsi' => $provinsi->id
+        ]);
+
+        \App\Models\Kabupaten::create([
+            'nama' => 'Kabupaten Cirebon',
+            'kode' => '09',
+            'id_provinsi' => $provinsi->id
         ]);
     }
 }
