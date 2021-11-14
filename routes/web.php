@@ -47,11 +47,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
-Auth::routes(['register' => false]);
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -136,7 +134,7 @@ Route::middleware(['auth'])->prefix('desa')->group(function () {
     Route::post('pelaksana-kegiatan/destroys', [PelaksanaKegiatanController::class, 'destroys'])->name('pelaksana-kegiatan.destroy');
     Route::resource('pelaksana-kegiatan', PelaksanaKegiatanController::class)->except(['show', 'destroy']);
 
-    Route::prefix('perencanaan')->group(function(){
+    Route::prefix('perencanaan')->group(function () {
         Route::post('visi/destroys', [PerencanaanVisiController::class, 'destroys'])->name('visi.destroy');
         Route::get('visi/{visi}/print/setup', [PerencanaanVisiController::class, 'printSetup'])->name('visi.print.setup');
         Route::patch('visi/{visi}/print/setup', [PerencanaanVisiController::class, 'printStore'])->name('visi.print.store');
@@ -162,7 +160,7 @@ Route::middleware(['auth'])->prefix('desa')->group(function () {
         Route::resource('sasaran', PerencanaanSasaranController::class)->only(['edit', 'update']);
     });
 
-    Route::prefix('rpjmd')->group(function(){
+    Route::prefix('rpjmd')->group(function () {
 
         Route::get('visi', [RPJMDVisiController::class, 'index'])->name('rpjmd.visi.index');
 
@@ -192,11 +190,11 @@ Route::middleware(['auth'])->prefix('desa')->group(function () {
     });
 
     Route::prefix('penganggaran')->group(function () {
-        
+
         Route::post('tahun-anggaran/destroys', [PenganggaranTahunController::class, 'destroys'])->name('tahun-anggaran.destroy');
         Route::resource('tahun-anggaran', PenganggaranTahunController::class)->except(['show', 'destroy']);
-        
-        
+
+
         Route::get('tahun/bidang', [PenganggaranTahunBidangController::class, 'index'])->name('bidang.tahun-anggaran.index');
         Route::post('{tahun_anggaran}/bidang/destroys', [PenganggaranBidangController::class, 'destroys'])->name('penganggaran.bidang.destroy');
         Route::get('{tahun_anggaran}/bidang', [PenganggaranBidangController::class, 'index'])->name('penganggaran.bidang.index');
@@ -227,6 +225,5 @@ Route::middleware(['auth'])->prefix('desa')->group(function () {
         Route::get('{tahun_anggaran}/pendapatan', [PenganggaranPendapatanController::class, 'index'])->name('penganggaran.pendapatan.index');
         Route::get('{tahun_anggaran}/pendapatan/create', [PenganggaranPendapatanController::class, 'create'])->name('penganggaran.pendapatan.create');
         Route::post('{tahun_anggaran}/pendapatan/store', [PenganggaranPendapatanController::class, 'store'])->name('penganggaran.pendapatan.store');
-
     });
 });
