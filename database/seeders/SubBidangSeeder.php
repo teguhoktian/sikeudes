@@ -13,29 +13,36 @@ class SubBidangSeeder extends Seeder
      */
     public function run()
     {
+        $bidang = \App\Models\Bidang::where(['kode' => '01'])->first();
+
         \App\Models\SubBidang::create([
             'nama' => 'Penyelenggaran Belanja Siltap, Tunjangan dan Operasional Pemerintahan Desa',
-            'kode' => '01'
+            'kode' => '01',
+            'id_bidang' => $bidang->id
         ]);
 
         \App\Models\SubBidang::create([
             'nama' => 'Penyediaan Sarana Prasarana Pemerintahan Desa',
-            'kode' => '02'
+            'kode' => '02',
+            'id_bidang' => $bidang->id
         ]);
 
         \App\Models\SubBidang::create([
             'nama' => 'Pengelolaan Administrasi Kependudukan, Pencatatan Sipil, Statistik dan Kearsipan',
-            'kode' => '03'
+            'kode' => '03',
+            'id_bidang' => $bidang->id
         ]);
 
         \App\Models\SubBidang::create([
             'nama' => 'Penyelenggaraan Tata Praja Pemerintahan, Perencanaan, Keuangan dan Pelaporan',
-            'kode' => '04'
+            'kode' => '04',
+            'id_bidang' => $bidang->id
         ]);
 
         \App\Models\SubBidang::create([
             'nama' => 'Pertanahan',
-            'kode' => '05'
+            'kode' => '05',
+            'id_bidang' => $bidang->id
         ]);
     }
 }
