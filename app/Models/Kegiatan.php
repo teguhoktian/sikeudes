@@ -11,6 +11,7 @@ class Kegiatan extends Model
     use HasFactory, Uuid;
     protected $fillable = ['nama', 'kode', 'id_sub_bidang'];
     protected $table = 'kegiatan';
+    protected $keyType = 'string';
     public $incrementing = false;
 
     /**
@@ -25,6 +26,6 @@ class Kegiatan extends Model
 
     public function getFullNameAttribute()
     {
-        return (($this->sub_bidang) ? $this->sub_bidang->bidang->kode .".". $this->sub_bidang->kode : '') . "." . $this->kode . ' - ' . $this->nama;
+        return (($this->sub_bidang) ? $this->sub_bidang->bidang->kode . "." . $this->sub_bidang->kode : '') . "." . $this->kode . ' - ' . $this->nama;
     }
 }

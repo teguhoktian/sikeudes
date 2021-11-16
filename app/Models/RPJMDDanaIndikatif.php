@@ -12,6 +12,7 @@ class RPJMDDanaIndikatif extends Model
     protected $fillable = ['id_rpjmd_tahun_kegiatan', 'id_pelaksana_kegiatan', 'id_sumber_dana', 'lokasi', 'biaya', 'volume', 'satuan', 'waktu', 'pola', 'mulai', 'selesai'];
     protected $table = 'rpjmd_dana_indikatif';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * Get the tahun_kegiatan that owns the RPJMDDanaIndikatif
@@ -42,6 +43,4 @@ class RPJMDDanaIndikatif extends Model
     {
         return $this->belongsTo(SumberDana::class, 'id_sumber_dana');
     }
-
-    
 }

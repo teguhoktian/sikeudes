@@ -11,6 +11,7 @@ class PenganggaranBidang extends Model
     use HasFactory, Uuid;
     protected $fillable = ['id_bidang', 'id_desa', 'id_penganggaran_tahun'];
     protected $table = 'penganggaran_bidang';
+    protected $keyType = 'string';
     public $incrementing = false;
 
     /**

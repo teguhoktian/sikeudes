@@ -13,6 +13,7 @@ class RekeningJenis extends Model
     protected $fillable = ['nama', 'kode', 'id_kelompok'];
     protected $table = 'rekening_jenis';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * Get the kelompok that owns the RekeningJenis

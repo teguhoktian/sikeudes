@@ -13,6 +13,7 @@ class RekeningKelompok extends Model
     protected $fillable = ['nama', 'kode', 'id_akun'];
     protected $table = 'rekening_kelompok';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * Get the akun that owns the RekeningKelompok
@@ -38,5 +39,4 @@ class RekeningKelompok extends Model
     {
         return (($this->akun) ? $this->akun->kode : '') . "." . $this->kode . ' - ' . $this->nama;
     }
-    
 }

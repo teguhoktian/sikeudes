@@ -11,6 +11,7 @@ class Kabupaten extends Model
     use HasFactory, Uuid;
     protected $table = 'kabupaten';
     public $incrementing = false;
+    protected $keyType = 'string';
     protected $fillable = ['nama', 'kode', 'id_provinsi'];
 
     /**

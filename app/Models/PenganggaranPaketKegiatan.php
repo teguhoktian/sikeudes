@@ -11,6 +11,7 @@ class PenganggaranPaketKegiatan extends Model
     use HasFactory, Uuid;
     protected $fillable = ['id_penganggaran_kegiatan', 'id_sumber_dana', 'nama_paket', 'nilai_paket', 'pola', 'sifat_paket', 'volume_paket', 'lokasi_paket', 'satuan'];
     protected $table = 'penganggaran_paket_kegiatan';
+    protected $keyType = 'string';
     public $incrementing = false;
 
 

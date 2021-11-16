@@ -12,6 +12,7 @@ class RPJMDSubBidang extends Model
     protected $fillable = ['id_sub_bidang', 'id_rpjmd_bidang'];
     protected $table = 'rpjmd_subbidang';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * Get the sub_bidang that owns the RPJMDSubBidang

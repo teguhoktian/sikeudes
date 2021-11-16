@@ -11,6 +11,7 @@ class PelaksanaKegiatan extends Model
     use HasFactory, Uuid;
     protected $fillable = ['nama', 'jabatan', 'aktif', 'id_desa'];
     protected $table = 'pelaksana_kegiatan';
+    protected $keyType = 'string';
     public $incrementing = false;
 
     /**

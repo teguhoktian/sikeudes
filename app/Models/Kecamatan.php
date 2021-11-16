@@ -11,6 +11,7 @@ class Kecamatan extends Model
     use HasFactory, Uuid;
     protected $table = 'kecamatan';
     public $incrementing = false;
+    protected $keyType = 'string';
     protected $fillable = ['nama', 'kode', 'id_kabupaten'];
 
     /**
@@ -32,5 +33,4 @@ class Kecamatan extends Model
     {
         return $this->hasMany(Desa::class, 'id_kecamatan', 'id');
     }
-
 }

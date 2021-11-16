@@ -12,6 +12,7 @@ class SekretarisDesa extends Model
     protected $fillable = ['nama', 'jabatan', 'aktif', 'id_desa'];
     protected $table = 'sekretaris_desa';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * Get the desa that owns the KepalaDesa

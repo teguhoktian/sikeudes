@@ -12,6 +12,7 @@ class PerencanaanMisi extends Model
     protected $fillable = ['kode', 'uraian', 'id_visi'];
     protected $table = 'perencanaan_misi';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * Get the visi that owns the PerencanaanMisi

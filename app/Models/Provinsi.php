@@ -12,6 +12,7 @@ class Provinsi extends Model
     protected $table = 'provinsi';
     public $incrementing = false;
     protected $fillable = ['nama', 'kode'];
+    protected $keyType = 'string';
 
     /**
      * Get all of the kabupatens for the Provinsi

@@ -12,6 +12,7 @@ class Desa extends Model
 
     protected $fillable = ['nama', 'kode', 'id_kecamatan'];
     protected $table = 'desa';
+    protected $keyType = 'string';
     public $incrementing = false;
 
 
@@ -29,5 +30,4 @@ class Desa extends Model
     {
         return $this->nama . ' - ' . $this->kecamatan->nama . ' - ' . $this->kecamatan->kabupaten->nama;
     }
-
 }

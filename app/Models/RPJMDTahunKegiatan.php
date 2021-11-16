@@ -13,6 +13,7 @@ class RPJMDTahunKegiatan extends Model
     protected $fillable = ['id_rpjmd_kegiatan', 'tahun', 'tahun_ke'];
     protected $table = 'rpjmd_tahun_kegiatan';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * Get the rpjmd_kegiatan that owns the RPJMDTahunKegiatan

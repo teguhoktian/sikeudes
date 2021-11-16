@@ -13,6 +13,7 @@ class RekeningObjek extends Model
     protected $fillable = ['nama', 'kode', 'id_jenis'];
     protected $table = 'rekening_objek';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * Get the jenis that owns the RekeningObjek

@@ -11,6 +11,7 @@ class Bidang extends Model
     use HasFactory, Uuid;
     protected $fillable = ['nama', 'kode'];
     protected $table = 'bidang';
+    protected $keyType = 'string';
     public $incrementing = false;
 
     /**

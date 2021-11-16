@@ -12,6 +12,7 @@ class RekeningAkun extends Model
     protected $fillable = ['nama', 'kode'];
     protected $table = 'rekening_akun';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * Get all of the kelompoks for the RekeningAkun

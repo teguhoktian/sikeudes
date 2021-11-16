@@ -12,6 +12,7 @@ class PenganggaranTahun extends Model
     protected $fillable = ['tahun', 'id_desa'];
     protected $table = 'penganggaran_tahun';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * Get the desa that owns the PenganggaranTahun

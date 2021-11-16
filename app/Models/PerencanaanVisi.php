@@ -13,6 +13,7 @@ class PerencanaanVisi extends Model
     protected $fillable = ['kode', 'uraian', 'tahun_awal', 'tahun_akhir', 'id_desa'];
     protected $table = 'perencanaan_visi';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * Get the desa that owns the KepalaDesa
@@ -38,5 +39,4 @@ class PerencanaanVisi extends Model
     {
         return $this->kode . ' - ' . $this->uraian;
     }
-
 }

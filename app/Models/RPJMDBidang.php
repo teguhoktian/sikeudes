@@ -12,6 +12,7 @@ class RPJMDBidang extends Model
     protected $fillable = ['id_bidang', 'id_desa', 'id_visi'];
     protected $table = 'rpjmd_bidang';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * Get the desa that owns the RPJMDBidang

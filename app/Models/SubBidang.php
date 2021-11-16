@@ -12,6 +12,7 @@ class SubBidang extends Model
     protected $fillable = ['nama', 'kode', 'id_bidang'];
     protected $table = 'sub_bidang';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * Get the bidang that owns the SubBidang

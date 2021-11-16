@@ -12,6 +12,7 @@ class PerencanaanTujuan extends Model
     protected $fillable = ['kode', 'uraian', 'id_misi'];
     protected $table = 'perencanaan_tujuan';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * Get the misi that owns the PerencanaanTujuan
@@ -35,6 +36,6 @@ class PerencanaanTujuan extends Model
 
     public function getFullNameAttribute()
     {
-        return (($this->misi) ? $this->misi->visi->kode .".". $this->misi->kode : '') . "." . $this->kode . ' - ' . $this->uraian;
+        return (($this->misi) ? $this->misi->visi->kode . "." . $this->misi->kode : '') . "." . $this->kode . ' - ' . $this->uraian;
     }
 }

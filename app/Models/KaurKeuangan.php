@@ -11,6 +11,7 @@ class KaurKeuangan extends Model
     use HasFactory, Uuid;
     protected $fillable = ['nama', 'jabatan', 'aktif', 'id_desa'];
     protected $table = 'kaur_keuangan';
+    protected $keyType = 'string';
     public $incrementing = false;
 
     /**
@@ -22,5 +23,4 @@ class KaurKeuangan extends Model
     {
         return $this->belongsTo(Desa::class, 'id_desa');
     }
-
 }

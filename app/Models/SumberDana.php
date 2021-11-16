@@ -13,4 +13,5 @@ class SumberDana extends Model
     protected $fillable = ['nama', 'kode'];
     protected $table = 'sumber_dana';
     public $incrementing = false;
+    protected $keyType = 'string';
 }

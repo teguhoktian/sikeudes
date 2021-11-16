@@ -13,6 +13,7 @@ class PerencanaanSasaran extends Model
     protected $fillable = ['kode', 'uraian', 'id_tujuan'];
     protected $table = 'perencanaan_sasaran';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * Get the tujuan that owns the PerencanaanSasaran
@@ -23,6 +24,4 @@ class PerencanaanSasaran extends Model
     {
         return $this->belongsTo(PerencanaanTujuan::class, 'id_tujuan');
     }
-
-    
 }

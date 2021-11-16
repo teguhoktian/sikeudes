@@ -11,6 +11,7 @@ class PenganggaranKegiatan extends Model
     use HasFactory, Uuid;
     protected $fillable = ['id_penganggaran_sub_bidang', 'id_kegiatan', 'id_pelaksana', 'lokasi', 'keluaran', 'waktu_pelaksanaan', 'pagu', 'volume', 'satuan'];
     protected $table = 'penganggaran_kegiatan';
+    protected $keyType = 'string';
     public $incrementing = false;
 
     /**
@@ -52,5 +53,4 @@ class PenganggaranKegiatan extends Model
     {
         return $this->hasMany(PenganggaranPaketKegiatan::class, 'id_penganggaran_kegiatan', 'id');
     }
-
 }
