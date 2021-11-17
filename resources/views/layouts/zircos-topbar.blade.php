@@ -26,7 +26,7 @@
                         <i class="mdi mdi-menu"></i>
                     </button>
                 </li>
-                <li class="hidden-xs">
+                <!-- <li class="hidden-xs">
                     <form role="search" class="app-search">
                         <input type="text" placeholder="Search..." class="form-control">
                         <a href=""><i class="fa fa-search"></i></a>
@@ -41,12 +41,12 @@
                     <ul role="menu" class="dropdown-menu">
                         <li><a href="#">EN</a></li>
                     </ul>
-                </li>
+                </li> -->
             </ul>
 
             <!-- Right(Notification) -->
             <ul class="nav navbar-nav navbar-right">
-                <li>
+                <!-- <li>
                     <a href="#" class="right-menu-item dropdown-toggle" data-toggle="dropdown">
                         <i class="mdi mdi-bell"></i>
                         <span class="badge up bg-success">4</span>
@@ -145,7 +145,7 @@
                             <p class="m-0"><a href="#">See all Messages</a></p>
                         </li>
                     </ul>
-                </li>
+                </li> -->
 
                 <li class="dropdown user-box">
                     <a href="" class="dropdown-toggle waves-effect user-link" data-toggle="dropdown" aria-expanded="true">
@@ -154,15 +154,15 @@
 
                     <ul class="dropdown-menu dropdown-menu-right arrow-dropdown-menu arrow-menu-right user-list notify-list">
                         <li>
-                            <h5>Hi, John</h5>
+                            <h5>Hi, {{ Auth::user()->name }}</h5>
                         </li>
-                        <li><a href="javascript:void(0)"><i class="ti-user m-r-5"></i> Profile</a></li>
+                        <!-- <li><a href="javascript:void(0)"><i class="ti-user m-r-5"></i> Profile</a></li>
                         <li><a href="javascript:void(0)"><i class="ti-settings m-r-5"></i> Settings</a></li>
-                        <li><a href="javascript:void(0)"><i class="ti-lock m-r-5"></i> Lock screen</a></li>
+                        <li><a href="javascript:void(0)"><i class="ti-lock m-r-5"></i> Lock screen</a></li> -->
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                <i class="ti-power-off m-r-5"></i>{{ __('Logout') }}
+                                <i class="ti-power-off m-r-5"></i>{{ __('Keluar') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
