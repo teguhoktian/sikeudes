@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PenganggaranPendapatanRequest;
 use App\Models\PenganggaranPendapatan;
 use App\Models\PenganggaranTahun;
+use App\Models\RekeningObjek;
 use App\Services\PenganggaranPendapatanServices;
 use Illuminate\Http\Request;
 
@@ -20,6 +22,12 @@ class PenganggaranPendapatanController extends Controller
         return view('penganggaran_pendapatan.index')->with(['tahunAnggaran' => $tahunAnggaran]);
     }
 
+    public function detail(PenganggaranTahun $tahunAnggaran, RekeningObjek $rekeningObjek, PenganggaranPendapatanServices $services)
+    {
+        if (request()->ajax()) return $services->getDetailDataTables($tahunAnggaran, $rekeningObjek);
+        return view('penganggaran_pendapatan.index2')->with(['tahunAnggaran' => $tahunAnggaran, 'rekeningObjek' => $rekeningObjek]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -28,7 +36,7 @@ class PenganggaranPendapatanController extends Controller
     public function create(PenganggaranTahun $tahunAnggaran, PenganggaranPendapatanServices $services)
     {
         // Cari Kegiatan berdasarkan sub bidang
-        $sumber_dana = \App\Models\SumberDana::get()->pluck('nama', 'id');
+        $sumber_dana = \App\Models\SumberDana::orderBy('kode', 'ASC')->get()->pluck('full_name', 'id');
         $rekening_objek = $services->pendapatanOptions();
 
         return view('penganggaran_pendapatan.create')->with([
@@ -44,10 +52,10 @@ class PenganggaranPendapatanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PenganggaranPendapatanRequest $request, PenganggaranTahun $tahunAnggaran, PenganggaranPendapatanServices $services)
     {
-        $services->store($subBidang, $request);
-        return redirect()->route("penganggaran.kegiatan.index", ["sub_bidang" => $subBidang->id])->with(['status' => 'success', 'message' => __('Data telah disimpan')]);
+        $services->store($tahunAnggaran, $request);
+        return redirect()->route("penganggaran.pendapatan.index", ["tahun_anggaran" => $tahunAnggaran->id])->with(['status' => 'success', 'message' => __('Data telah disimpan')]);
     }
     /**
      * Display the specified resource.
@@ -66,16 +74,16 @@ class PenganggaranPendapatanController extends Controller
      * @param  \App\Models\PenganggaranPendapatan  $penganggaranPendapatan
      * @return \Illuminate\Http\Response
      */
-    public function edit(PenganggaranPendapatan $penganggaranPendapatan)
+    public function edit(PenganggaranPendapatan $pendapatan, PenganggaranPendapatanServices $services)
     {
-        $kegiatans = Kegiatan::where(['id_sub_bidang' => $kegiatan->penganggaran_sub_bidang->sub_bidang->id])->orderBy('kode', 'ASC')->get()->pluck('full_name', 'id');
-        $pelaksanas = PelaksanaKegiatan::where(['id_desa' => Auth::user()->desa->id])->get()->pluck('full_name', 'id');
+        $sumber_dana = \App\Models\SumberDana::orderBy('kode', 'ASC')->get()->pluck('full_name', 'id');
+        $rekening_objek = $services->pendapatanOptions();
 
-        return view('penganggaran_kegiatan.edit')->with([
-            'kegiatan' => $kegiatan,
-            'subBidang' => $kegiatan->penganggaran_sub_bidang,
-            'kegiatans' => $kegiatans,
-            'pelaksanas' => $pelaksanas
+        return view('penganggaran_pendapatan.edit')->with([
+            'pendapatan' => $pendapatan,
+            'tahunAnggaran' => $pendapatan->tahun_anggaran->id,
+            'sumber_dana' => $sumber_dana,
+            'rekening_objek' => $rekening_objek
         ]);
     }
 
@@ -86,10 +94,10 @@ class PenganggaranPendapatanController extends Controller
      * @param  \App\Models\PenganggaranPendapatan  $penganggaranPendapatan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PenganggaranPendapatan $penganggaranPendapatan)
+    public function update(PenganggaranPendapatanRequest $request, PenganggaranPendapatan $pendapatan, PenganggaranPendapatanServices $services)
     {
-        $services->update($request, $kegiatan);
-        return redirect()->route("penganggaran.kegiatan.index", ["sub_bidang" => $kegiatan->penganggaran_sub_bidang->id])->with(['status' => 'success', 'message' => __('Data telah disimpan')]);
+        $services->update($request, $pendapatan);
+        return redirect()->route("penganggaran.pendapatan.index", ["tahun_anggaran" => $pendapatan->tahun_anggaran->id])->with(['status' => 'success', 'message' => __('Data telah disimpan')]);
     }
 
     /**
@@ -103,13 +111,13 @@ class PenganggaranPendapatanController extends Controller
         //
     }
 
-    public function destroys(Request $request, PenganggaranSubBidang $subBidang)
+    public function destroys(Request $request, PenganggaranTahun $tahunAnggaran, RekeningObjek $rekeningObjek)
     {
         if ($request->id) {
             foreach ($request->id as $id) {
-                PenganggaranKegiatan::find($id)->delete();
+                PenganggaranPendapatan::find($id)->delete();
             }
         }
-        return redirect()->route('penganggaran.kegiatan.index', ['sub_bidang' => $subBidang->id])->with(['status' => 'success', 'message' => __('Data telah dihapus')]);
+        return redirect()->route('penganggaran.pendapatan.index', ['tahun_anggaran' => $tahunAnggaran->id, 'rekening_objek' => $rekeningObjek->id])->with(['status' => 'success', 'message' => __('Data telah dihapus')]);
     }
 }

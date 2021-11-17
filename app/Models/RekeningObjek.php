@@ -15,6 +15,10 @@ class RekeningObjek extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+    protected $appends = [
+        'full_code'
+    ];
+
     /**
      * Get the jenis that owns the RekeningObjek
      *
@@ -23,5 +27,18 @@ class RekeningObjek extends Model
     public function jenis()
     {
         return $this->belongsTo(RekeningJenis::class, 'id_jenis');
+    }
+
+    public function getFullCodeAttribute()
+    {
+        $kode  = $this->jenis->kelompok->akun->kode;
+        $kode .= '.';
+        $kode .= $this->jenis->kelompok->kode;
+        $kode .= '.';
+        $kode .= $this->jenis->kode;
+        $kode .= '.';
+        $kode .= $this->kode;
+
+        return $kode;
     }
 }

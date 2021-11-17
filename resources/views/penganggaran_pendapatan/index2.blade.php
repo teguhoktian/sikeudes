@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="page-title-box">
-                <h4 class="page-title">{{ __('Penganggaran Pendapatan') }} - {{ Auth::user()->desa->nama }}</h4>
+                <h4 class="page-title">{{ __('Detail Penganggaran Pendapatan') }} - {{ Auth::user()->desa->nama }}</h4>
                 <ol class="breadcrumb p-0 m-0">
                     <li>
                         <a href="/">{{ __('Beranda') }}</a>
@@ -14,7 +14,7 @@
                         <a href="/">{{ __('Penganggaran Pendapatan') }} </a>
                     </li>
                     <li class="active">
-                        {{ __('Penganggaran Pendapatan') }}
+                        {{ __('Detail Penganggaran Pendapatan') }}
                     </li>
                 </ol>
                 <div class="clearfix"></div>
@@ -30,15 +30,24 @@
                         <thead>
                             <tr>
                                 <th colspan="2">{{ __('Tahun Anggaran') }}</th>
-                                <th colspan="3">
+                                <th colspan="5">
                                     {{ $tahunAnggaran->tahun }}
                                 </th>
                             </tr>
                             <tr>
+                                <th colspan="2">{{ __('Rekening') }}</th>
+                                <th colspan="5">
+                                    {{ $rekeningObjek->full_code }}
+                                    - {{ $rekeningObjek->nama }}
+                                </th>
+                            </tr>
+                            <tr>
                                 <th width="1">#</th>
-                                <th width="1">{{ __('Kode') }}</th>
-                                <th>{{ __('Nama Rekening') }}</th>
-                                <th>{{ __('Jumlah Anggaran') }}</th>
+                                <th width="1">{{ __('No') }}</th>
+                                <th>{{ __('Uraian') }}</th>
+                                <th>{{ __('Anggaran') }}</th>
+                                <th>{{ __('Volume') }}</th>
+                                <th>{{ __('Total Anggaran') }}</th>
                                 <th width="1">{{ __('Action') }}</th>
                             </tr>
                         </thead>
@@ -47,7 +56,9 @@
                             <tr>
                                 <td></td>
                                 <td></td>
-                                <td> {{ __('Total Anggaran') }} </td>
+                                <td> {{ __('Total') }} </td>
+                                <td></td>
+                                <td></td>
                                 <td id="grand_total" class="text-right"></td>
                                 <td></td>
                             </tr>
@@ -59,6 +70,12 @@
     </div>
 </div>
 <!-- end row -->
+
+<div class="row">
+    {!! Form::open(['route' => ['penganggaran.pendapatan.destroy', ['tahun_anggaran' => $tahunAnggaran->id, 'rekening_objek' => $rekeningObjek->id]], 'id' => 'deleteForm']) !!}
+    </form>
+</div>
+
 </div> <!-- container -->
 @endsection
 
@@ -89,11 +106,11 @@
     var table = '';
     $(document).ready(function() {
         var routeAdd = '{{route("penganggaran.pendapatan.create", ["tahun_anggaran" => $tahunAnggaran->id])}}';
-        var IndexRoute = '{{ route("penganggaran.pendapatan.index", ["tahun_anggaran" => $tahunAnggaran->id]) }}';
+        var IndexRoute = '{{ route("penganggaran.pendapatan.detail.index", ["tahun_anggaran" => $tahunAnggaran->id, "rekening_objek" => $rekeningObjek->id]) }}';
         var textAdd = '{{ __("Tambah Data") }}';
         var textDelete = '<i class="mdi mdi-delete-forever"></i> {{ __("Hapus") }}';
-        var routeUp = '{{ route("pendapatan.tahun-anggaran.index")}}';
-        var textUp = '{{ __("Tahun Anggaran") }}';
+        var routeUp = '{{ route("penganggaran.pendapatan.index", ["tahun_anggaran" => $tahunAnggaran->id])}}';
+        var textUp = '{{ __("Anggaran") }}';
 
         table = $('#datatable').DataTable({
             processing: true,
@@ -105,14 +122,20 @@
             },
             ajax: IndexRoute,
             columns: [{
-                data: 'rekening_objek.full_code',
+                data: 'id',
                 'checkboxes': true
             }, {
-                data: 'rekening_objek.full_code',
+                data: 'DT_RowIndex',
+                orderable: false,
+                sortable: false
             }, {
-                data: 'rekening_objek.nama'
+                data: 'uraian',
             }, {
                 data: 'harga_satuan'
+            }, {
+                data: 'volume'
+            }, {
+                data: 'total'
             }, {
                 data: 'action',
                 orderable: false,
@@ -123,6 +146,9 @@
                 'checkboxes': {
                     'selectRow': true
                 }
+            }, {
+                'targets': -2,
+                'className': 'text-right'
             }, {
                 'targets': 3,
                 'className': 'text-right'
@@ -139,9 +165,23 @@
                 exclude: [0, 5]
             },
             initComplete: function() {
-                $("div.ColVis").append('<a href="' + routeAdd + '" class="btn btn-primary btn-sm">' + textAdd + '</a> <a href="' + routeUp + '" class="btn btn-inverse btn-sm"><i class="fa fa-level-up"></i> ' + textUp + '</a>');
+                $("div.ColVis").append('<a href="' + routeAdd + '" class="btn btn-primary btn-sm">' + textAdd + '</a> <button class="btn btn-sm btn-danger" id="btnDelete" onclick="deleteData()">' + textDelete + '</button> <a href="' + routeUp + '" class="btn btn-inverse btn-sm"><i class="fa fa-level-up"></i> ' + textUp + '</a>');
             }
         });
     })
+
+    function deleteData() {
+        var rows_selected = table.column(0).checkboxes.selected();
+        var form = $('#deleteForm');
+        $.each(rows_selected, function(index, rowId) {
+            form.append(
+                $('<input>')
+                .attr('type', 'hidden')
+                .attr('name', 'id[]')
+                .val(rowId)
+            );
+        });
+        form.submit();
+    }
 </script>
 @stop

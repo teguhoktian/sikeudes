@@ -111,7 +111,7 @@
                             </a>
                         </li>
                         <li>
-                            <a @if (Request::segment(2)=='penganggaran' && in_array(Request::segment(4),["pendapatan"]) ) class="open" @endif href="desa/penganggaran/tahun/bidang">
+                            <a @if (Request::segment(2)=='penganggaran' && in_array(Request::segment(4),["pendapatan"]) ) class="open" @endif href="desa/penganggaran/tahun/pendapatan">
                                 {{ __('Pendapatan') }}
                             </a>
                         </li>

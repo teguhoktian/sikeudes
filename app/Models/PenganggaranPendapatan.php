@@ -13,4 +13,34 @@ class PenganggaranPendapatan extends Model
     protected $table = 'penganggaran_pendapatan';
     protected $keyType = 'string';
     public $incrementing = false;
+
+    /**
+     * Get the sumber_dana that owns the PenganggaranPendapatan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function sumber_dana()
+    {
+        return $this->belongsTo(SumberDana::class, 'id_sumber_dana');
+    }
+
+    /**
+     * Get the rekening_objek that owns the PenganggaranPendapatan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function rekening_objek()
+    {
+        return $this->belongsTo(RekeningObjek::class, 'id_rekening_objek');
+    }
+
+    /**
+     * Get the tahun_anggaran that owns the PenganggaranPendapatan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tahun_anggaran()
+    {
+        return $this->belongsTo(PenganggaranTahun::class, 'id_penganggaran_tahun');
+    }
 }

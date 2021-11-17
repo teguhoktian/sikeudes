@@ -14,4 +14,9 @@ class SumberDana extends Model
     protected $table = 'sumber_dana';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    public function getFullNameAttribute()
+    {
+        return "(" . $this->kode . ") " . $this->nama;
+    }
 }
