@@ -55,7 +55,7 @@ class PenganggaranPendapatanController extends Controller
     public function store(PenganggaranPendapatanRequest $request, PenganggaranTahun $tahunAnggaran, PenganggaranPendapatanServices $services)
     {
         $services->store($tahunAnggaran, $request);
-        return redirect()->route("penganggaran.pendapatan.index", ["tahun_anggaran" => $tahunAnggaran->id])->with(['status' => 'success', 'message' => __('Data telah disimpan')]);
+        return redirect()->route("penganggaran.pendapatan.detail.index", ["tahun_anggaran" => $tahunAnggaran->id, "rekening_objek" => $request->id_rekening_objek])->with(['status' => 'success', 'message' => __('Data telah disimpan')]);
     }
     /**
      * Display the specified resource.
@@ -97,7 +97,7 @@ class PenganggaranPendapatanController extends Controller
     public function update(PenganggaranPendapatanRequest $request, PenganggaranPendapatan $pendapatan, PenganggaranPendapatanServices $services)
     {
         $services->update($request, $pendapatan);
-        return redirect()->route("penganggaran.pendapatan.index", ["tahun_anggaran" => $pendapatan->tahun_anggaran->id])->with(['status' => 'success', 'message' => __('Data telah disimpan')]);
+        return redirect()->route("penganggaran.pendapatan.detail.index", ["tahun_anggaran" => $pendapatan->tahun_anggaran->id, "rekening_objek" => $pendapatan->id_rekening_objek])->with(['status' => 'success', 'message' => __('Data telah disimpan')]);
     }
 
     /**
@@ -118,6 +118,6 @@ class PenganggaranPendapatanController extends Controller
                 PenganggaranPendapatan::find($id)->delete();
             }
         }
-        return redirect()->route('penganggaran.pendapatan.index', ['tahun_anggaran' => $tahunAnggaran->id, 'rekening_objek' => $rekeningObjek->id])->with(['status' => 'success', 'message' => __('Data telah dihapus')]);
+        return redirect()->route('penganggaran.pendapatan.detail.index', ['tahun_anggaran' => $tahunAnggaran->id, 'rekening_objek' => $rekeningObjek->id])->with(['status' => 'success', 'message' => __('Data telah dihapus')]);
     }
 }
