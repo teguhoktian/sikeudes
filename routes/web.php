@@ -228,5 +228,14 @@ Route::middleware(['auth'])->prefix('desa')->group(function () {
         Route::get('{pendapatan}/pendapatan/edit', [PenganggaranPendapatanController::class, 'edit'])->name('penganggaran.pendapatan.edit');
         Route::patch('{pendapatan}/pendapatan/update', [PenganggaranPendapatanController::class, 'update'])->name('penganggaran.pendapatan.update');
         Route::get('{tahun_anggaran}/pendapatan/{rekening_objek}/detail', [PenganggaranPendapatanController::class, 'detail'])->name('penganggaran.pendapatan.detail.index');
+
+        Route::get('tahun/pendapatan', [PenganggaranTahunPendapatanController::class, 'index'])->name('pendapatan.tahun-anggaran.index');
+        Route::post('{tahun_anggaran}/pendapatan/{rekening_objek}/destroys', [PenganggaranBelanjaController::class, 'destroys'])->name('penganggaran.pendapatan.destroy');
+        Route::get('{tahun_anggaran}/pendapatan', [PenganggaranBelanjaController::class, 'index'])->name('penganggaran.pendapatan.index');
+        Route::get('{tahun_anggaran}/pendapatan/create', [PenganggaranBelanjaController::class, 'create'])->name('penganggaran.pendapatan.create');
+        Route::post('{tahun_anggaran}/pendapatan/store', [PenganggaranBelanjaController::class, 'store'])->name('penganggaran.pendapatan.store');
+        Route::get('{pendapatan}/pendapatan/edit', [PenganggaranBelanjaController::class, 'edit'])->name('penganggaran.pendapatan.edit');
+        Route::patch('{pendapatan}/pendapatan/update', [PenganggaranBelanjaController::class, 'update'])->name('penganggaran.pendapatan.update');
+        Route::get('{tahun_anggaran}/pendapatan/{rekening_objek}/detail', [PenganggaranBelanjaController::class, 'detail'])->name('penganggaran.pendapatan.detail.index');
     });
 });

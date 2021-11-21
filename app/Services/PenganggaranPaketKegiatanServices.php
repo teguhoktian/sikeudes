@@ -20,7 +20,7 @@ class PenganggaranPaketKegiatanServices
         return Datatables::of(PenganggaranPaketKegiatan::with(['sumber_dana'])->where(['id_penganggaran_kegiatan' => $kegiatan->id])->get())
             ->addIndexColumn()
             ->addColumn('volume_paket', function ($row) {
-                return $row->volume_paket ." ". $row->satuan;
+                return $row->volume_paket . " " . $row->satuan;
             })
             ->addColumn('action', function ($row) {
                 $button = '';
@@ -62,7 +62,8 @@ class PenganggaranPaketKegiatanServices
             'Fisik Rehabilitasi' => 'Fisik Rehabilitasi',
             'Fisik Pemeliharaan' => 'Fisik Pemeliharaan',
             'Non Fisik Pelatihan' => 'Non Fisik Pelatihan',
-            'Non Fisik Bim. Tek.' => 'Non Fisik Bim. Tek.'
+            'Non Fisik Bim. Tek.' => 'Non Fisik Bim. Tek.',
+            'Non Fisik Lainnya' => 'Non Fisik Lainnya',
         ];
     }
 }
