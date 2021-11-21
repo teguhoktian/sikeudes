@@ -12,11 +12,13 @@ use App\Http\Controllers\PenganggaranBelanjaController;
 use App\Http\Controllers\PenganggaranBidangController;
 use App\Http\Controllers\PenganggaranKegiatanController;
 use App\Http\Controllers\PenganggaranPaketKegiatanController;
+use App\Http\Controllers\PenganggaranPembiayaanPendapatanController;
 use App\Http\Controllers\PenganggaranPendapatanController;
 use App\Http\Controllers\PenganggaranSubBidangController;
 use App\Http\Controllers\PenganggaranTahunBelanjaController;
 use App\Http\Controllers\PenganggaranTahunBidangController;
 use App\Http\Controllers\PenganggaranTahunController;
+use App\Http\Controllers\PenganggaranTahunPembiayaanPendapatanController;
 use App\Http\Controllers\PenganggaranTahunPendapatanController;
 use App\Http\Controllers\PerencanaanMisiController;
 use App\Http\Controllers\PerencanaanSasaranController;
@@ -239,5 +241,14 @@ Route::middleware(['auth'])->prefix('desa')->group(function () {
         Route::get('{belanja}/belanja/edit', [PenganggaranBelanjaController::class, 'edit'])->name('penganggaran.belanja.edit');
         Route::patch('{belanja}/belanja/update', [PenganggaranBelanjaController::class, 'update'])->name('penganggaran.belanja.update');
         Route::get('{tahun_anggaran}/belanja/{rekening_objek}/detail', [PenganggaranBelanjaController::class, 'detail'])->name('penganggaran.belanja.detail.index');
+
+        Route::get('tahun/biaya-pendapatan', [PenganggaranTahunPembiayaanPendapatanController::class, 'index'])->name('biaya-pendapatan.tahun-anggaran.index');
+        Route::post('{tahun_anggaran}/biaya-pendapatan/{rekening_objek}/destroys', [PenganggaranPembiayaanPendapatanController::class, 'destroys'])->name('penganggaran.biaya-pendapatan.destroy');
+        Route::get('{tahun_anggaran}/biaya-pendapatan', [PenganggaranPembiayaanPendapatanController::class, 'index'])->name('penganggaran.biaya-pendapatan.index');
+        Route::get('{tahun_anggaran}/biaya-pendapatan/create', [PenganggaranPembiayaanPendapatanController::class, 'create'])->name('penganggaran.biaya-pendapatan.create');
+        Route::post('{tahun_anggaran}/biaya-pendapatan/store', [PenganggaranPembiayaanPendapatanController::class, 'store'])->name('penganggaran.biaya-pendapatan.store');
+        Route::get('{biaya_pendapatan}/biaya-pendapatan/edit', [PenganggaranPembiayaanPendapatanController::class, 'edit'])->name('penganggaran.biaya-pendapatan.edit');
+        Route::patch('{biaya_pendapatan}/biaya-pendapatan/update', [PenganggaranPembiayaanPendapatanController::class, 'update'])->name('penganggaran.biaya-pendapatan.update');
+        Route::get('{tahun_anggaran}/biaya-pendapatan/{rekening_objek}/detail', [PenganggaranPembiayaanPendapatanController::class, 'detail'])->name('penganggaran.biaya-pendapatan.detail.index');
     });
 });
